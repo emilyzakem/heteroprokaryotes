@@ -1,0 +1,141 @@
+########################
+ &DARWIN_FORCING_PARAMS
+ ironFile='/home/ezakem/gud1/data/eccov3/mahowald2009_solubile_current_smooth_oce_mth-2d.bin',
+ ironPeriod= 2592000.,
+ ironStartTime= 1296000.,
+ darwin_inscal_iron= 1000.,
+ PARFile='/home/ezakem/gud1/data/eccov3/ecco_oasim_total_below_oneband_einm2d.bin',
+ PARPeriod= 2592000.,
+ PARStartTime= 1296000.,
+ darwin_inscal_PAR= 11.574074074074,
+ windFile='/home/ezakem/gud1/data/eccov3/tren_speed_mth-2d.bin',
+ windPeriod= 2592000.,
+ windStartTime= 1296000.,
+ icefile = '/home/ezakem/gud1/data/eccov3/SIarea.bin',
+ iceperiod     = 86400.0,
+ icestarttime  = 43200.0,
+ pCO2const= 278E-6,
+ /
+########################
+ &DARWIN_PARAMS
+ darwin_chlInitBalanced= T,
+ diaz_ini_fac= 0.1,
+ darwin_linFSConserve= T,
+ darwin_seed= 56,
+ darwin_read_phos= F,
+ tempCoeffArr= 0.8,
+ PARmin= 0.1,
+ alpfe= 1.0,
+ freefemax = .1E-3,
+ depthfesed= 7000.,
+ scav_rat= 1.73611111111111111111E-7,
+ kdoc=  0,  !3.8580246913580247E-7,  ! 1/30day
+ kdop=  0,  !3.8580246913580247E-7,  ! 1/30day
+ kdon=  0,  !3.8580246913580247E-7,  ! 1/30day
+ kdofe= 0,  !3.8580246913580247E-7,  ! 1/30day
+ kPOC=  0,  !3.8580246913580247E-7,  ! 1/30day
+ kPOP=  0,  !3.8580246913580247E-7,  ! 1/30day
+ kPON=  0,  !3.8580246913580247E-7,  ! 1/30day
+ kPOFe= 0,  !3.8580246913580247E-7,  ! 1/30day
+ phygrazmin= 120E-10,
+#Cejz: turn implicit nitrification off
+ knita= 0,
+ knitb= 0,
+ pmaxDIN= .0001175925925925926, !AOO max uptake rate = 50.8/86400*0.2 = mol NH4/mol biomass C at 30C 
+ ksatDIN= 0.133,
+ pcoefO2= 0.026956018518519, !2329/86400
+#Cejz: control hydrolysis (no hydrol: alpha = 1. default: alpha = 2):
+ alpha_hydrol = 2.,
+ yod = 0.3, !yield(j) = yod unless set in data.traits
+ /
+########################
+ &DARWIN_RADTRANS_PARAMS
+ /
+########################
+ &DARWIN_RANDOM_PARAMS
+ /
+########################
+ &DARWIN_TRAIT_PARAMS
+# #Cejz: 
+# # I added four new types: AB (aerobic het both DOM and POM), 
+# # there may be an easier way to organize attached vs free-living? 
+
+#                        D  l  s  P  T  C  AP AD AB NP ND NB AO NO B  Z
+ grp_nplank(:)=          1, 1, 1, 1, 1, 1, 3, 10, 0, 3, 5, 0, 1, 1, 0, 5,
+ grp_photo(:)=           1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+ grp_bactType(:)=        0, 0, 0, 0, 0, 0, 1, 2, 3, 1, 2, 3, 4, 5, 0, 0,
+ grp_aerobic(:)=         0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 0, 0,
+ grp_denit(:)=           0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0,
+ grp_pred(:)=            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+ grp_prey(:)=            1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0,
+ grp_hasSi(:)=           1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+ grp_hasPIC(:)=          0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+ grp_DIAZO(:)=           0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+ grp_useNH4(:)=          1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0,
+ grp_useNO2(:)=          1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0,
+ grp_useNO3(:)=          1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0,
+ grp_combNO(:)=          1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+ grp_tempMort(:)=        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+ grp_tempMort2(:)=       1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+ a_Xmin(:)= 15*120E-20,
+ a_mQyield(:)= 15*5E-5,
+ a_chl2cmax(:)= 15*.3,
+ a_acclimtimescl(:)= 15*.5,
+ a_acclimtimescl_denom(:)= 15*86400.,
+ logvolbase= -.9465,
+ logvolinc= .513,
+ logvol0ind(:)= 8, 8, 3, 1, 8, 6, 9*1, 3,
+# biovolfac(:)= 11*3.2583670100200877, 1.,
+ biovolfac(7:15)= 9*0., !bact all the same size for now, but can change! not sure why this doesn't change traits
+ a_biosink(:)= 6*6.951416635391563E-7, 10*0.,  !no bact sinking
+ b_biosink(:)= 15*.2833333333333333, 0.,
+ a_PCmax(1)= 7.5,
+ a_PCmax(2)= 2.0,
+ a_PCmax(3)= 0.6,
+ a_PCmax(4)= 0.6,
+ a_PCmax(5)= 0.9,
+ a_PCmax(6)= 3.0,
+# a_PCmax(7:15)= 9*0.0,
+ a_PCmax(7:12)= 6*1.0,
+ a_PCmax(13:15)= 3*0.0,
+ a_PCmax_denom(:)= 15*86400.,
+ b_PCmax(:)= -0.15, -0.15, -0.15, 0.07, -0.15, -0.15, 9*0.07, 0.,
+#
+ darwin_effective_ksat= T,
+ darwin_select_kn_allom= 1,
+#
+#Cejz: increase exp for Z from 0.6 to 1 (no comma after, following default)
+ a_ExportFracMort(:)= .4, .4, .1, .1, .4, .4, 9*.1, 1.,
+ a_ExportFracMort2(:)= .4, .4, .1, .1, .4, .4, 9*.1, 1.,
+ grp_ExportFracPreyPred(1:15,16)= 15*.8, 
+ a_R_ChlC(16)= 0.,
+#a_grazemax(16)= 1.57407407E-5,  ! 1/day 
+ a_grazemax(16)= 2.6213047103166739E-05,  ! 2/day
+ b_grazemax(16)= 0.,
+#
+#Cejz: original?: a_mort(:)= 6*1.6534391534391533e-06, 9*1.157407407407407e-07, 2.3148148148148148e-07,  ! 1/7days, 0.01/days, 1/50days
+ a_mort(:)= 15*0, 2.3148148148148148e-07,  ! 1/7days, 0.01/days, 1/50days
+# grp_mort2(:)= 7*0, 1.227553310886644e-06, !0.1 for P and B, 0.7 for Z  w/ 6.6 conv !from Nitrify
+ a_mort2(:)= 15*2.314814814814815e-07, 1.388888888888889e-06,  !0.1/5 for P and B, 0.6/5 for Z  !old Z: 16*.6/120/day
+# a_mort2(:)= 2.314814814814815e-08, 1.388888888888889e-06,  !0.1/5 for P and B, 0.6/5 for Z  !old Z: 16*.6/120/day
+ a_R_PC(:)= 6*0.008333333333333333, 9*0.012500000000000, 0.008333333333333333, !C:P = 80 for all B
+ a_R_FeC(:)= 4*0.008333333333333333E-3, 0.03333333333333333E-3, 0.008333333333333333E-3, 9*0.012500000000000E-3, 0.008333333333333333E-3,
+ a_R_NC(:)= 4*0.13333333333333333, 0.3333333333333333, 0.13333333333333333, 9*0.2, 0.13333333333333333,
+ a_R_SiC(:)= 0.13333333333333333, 15*0.,
+ a_R_PICPOC(:)= 5*0., .8, 10*0.,
+ a_kgrazesat(16)= 6.6,
+ b_kgrazesat(16)= 0.,
+#Topt!
+####CODE:
+##        photoFun(j) = exp(TempAeArr*(1. _d 0/(Temp+Tkel) -
+##     &                                  1. _d 0/(TemprefArr) ) )
+##        photoFun(j) = photoFun(j) *
+##     &      exp(-phytoTempExp2(j)*
+##     &           abs(Temp - phytoTempOptimum(j))**phytoDecayPower(j))
+##        photoFun(j) = TempCoeffArr*
+##     &               max(photoFun(j), 1. _d -10)
+########
+ a_phytoTempExp2(:) = 16*0. !all to overarching Arrhenius
+#a_phytoTempExp2(:) = 7*0., .0003, 2*0., 0.0003, 5*0., !only Topt for DOM-consumers: 8 and 11. This is "B"
+#a_phytoDecayPower(7:12) = 6*3., !make wider curves for bacteria. This is "C"
+ /

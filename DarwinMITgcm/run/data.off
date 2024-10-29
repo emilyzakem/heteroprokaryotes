@@ -1,0 +1,24 @@
+ &OFFLINE_PARM01
+  UvelFile= '/central/groups/carnegie_poc/ezakem/ECCO_Iter3.73daily/DDuvel/DDuvel',
+  VvelFile= '/central/groups/carnegie_poc/ezakem/ECCO_Iter3.73daily/DDvvel/DDvvel',
+  WvelFile= '/central/groups/carnegie_poc/ezakem/ECCO_Iter3.73daily/DDwvel/DDwvel',
+  GMwxFile= '/central/groups/carnegie_poc/ezakem/ECCO_Iter3.73daily/DGMkwx/DGMkwx',
+  GMwyFile= '/central/groups/carnegie_poc/ezakem/ECCO_Iter3.73daily/DGMkwy/DGMkwy',
+  GMwzFile= '/central/groups/carnegie_poc/ezakem/ECCO_Iter3.73daily/DGMkwz/DGMkwz',
+# ConvFile= 'input_off/Convtave',
+  SaltFile= '/central/groups/carnegie_poc/ezakem/ECCO_Iter3.73daily/DDsalt/DDsalt',
+  ThetFile= '/central/groups/carnegie_poc/ezakem/ECCO_Iter3.73daily/DDtheta/DDtheta',
+  SFluxFile='/central/groups/carnegie_poc/ezakem/ECCO_Iter3.73daily/DFOSflux/DFOSflux',
+# HFluxFile=' ',
+  KPP_DiffSFile='/central/groups/carnegie_poc/ezakem/ECCO_Iter3.73daily/DKPPdiffs/DKPPdiffs',
+  KPP_ghatKFile='/central/groups/carnegie_poc/ezakem/ECCO_Iter3.73daily/DKPPghatK/DKPPghatK',
+### offGen2DFile='/central/groups/carnegie_poc/ezakem/ECCO_Iter3.73daily/SIarea/SIarea',
+ &end
+
+ &OFFLINE_PARM02
+  offlineIter0=78912,
+  deltaToffline=3600.,
+  offlineForcingPeriod=86400.,
+  offlineForcingCycle=31104000.,
+ &end
+

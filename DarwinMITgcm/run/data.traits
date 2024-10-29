@@ -1,0 +1,318 @@
+ &DARWIN_TRAITS
+########################################################## 
+# ptracers_long_names(50)=  7 'BactPOM1',
+# ptracers_long_names(51)=  8 'BactPOM2',
+# ptracers_long_names(52)=  9 'BactPOM3',
+# ptracers_long_names(53)= 10 'BactDOM1copio',
+# ptracers_long_names(54)= 11 'BactDOM2copio',
+# ptracers_long_names(55)= 12 'BactDOM3copio',
+# ptracers_long_names(56)= 13 'BactDOM4copio',
+# ptracers_long_names(57)= 14 'BactDOM5copio',
+# ptracers_long_names(58)= 15 'BactDOM1oligo',
+# ptracers_long_names(59)= 16 'BactDOM2oligo',
+# ptracers_long_names(60)= 17 'BactDOM3oligo',
+# ptracers_long_names(61)= 18 'BactDOM4oligo',
+# ptracers_long_names(62)= 19 'BactDOM5oligo',
+# ptracers_long_names(63)= 20 'DenBactPOM1',
+# ptracers_long_names(64)= 21 'DenBactPOM2',
+# ptracers_long_names(65)= 22 'DenBactPOM3',
+# ptracers_long_names(66)= 23 'DenBactDOM1',
+# ptracers_long_names(67)= 24 'DenBactDOM2',
+# ptracers_long_names(68)= 25 'DenBactDOM3',
+# ptracers_long_names(69)= 26 'DenBactDOM4',
+# ptracers_long_names(70)= 27 'DenBactDOM5',
+# ptracers_long_names(71)= 28 'NH4oxid',
+# ptracers_long_names(72)= 29 'NO2oxid',
+########################################################## 
+#9/7/22: fiveDOMthreePOM_v8 : less narrow umax range than v7 
+#
+#from /Users/zakem/Documents/PriME/Bhet/LognormalDists/MakeVmax_for_v8.jl:
+#Cz n = 3
+#Cz mu = 1.0
+#Cz sigma = 1.5
+#Cz Vmax = [0.1, 1.0, 10.0]
+#Cz Weights = [0.19052989326037853, 0.6189402134792431, 0.19052989326037842]
+#Cz n = 5
+#Cz mu = 1.0
+#Cz sigma = 1.5
+#Cz Vmax = [0.03162277660168379, 0.1778279410038923, 1.0, 5.623413251903491, 31.622776601683793]
+#Cz Weights = [0.03249664704779133, 0.2373055871141486, 0.46039553167612013, 0.23730558711414854, 0.03249664704779133]
+#
+#from Darwin3_Bhet_Parameters.ipynb: 
+#Updated Dec 17 2023:
+#UPDATE Dec 2023 after finding: 1. 4/3 integer error and 2. tradeoff is too low (0.05 DOC) bc d was 0.3 for umax (me) but 0.4 for kDOC (Follet):
+#listed from slowest to fastest:
+#umax, Vmax, kDOC, and actual Vmax values into darwin
+#
+#1. Set of the 5 smaller, high-affinity types:
+#('d: ', 0.4)
+#('VmaxA: ', array([7.47827496e-02, 4.20534305e-01, 2.36483818e+00, 1.32984624e+01,
+#       7.47827496e+01]))
+#('umaxA: ', array([2.24348249e-02, 1.26160292e-01, 7.09451455e-01, 3.98953871e+00,
+#       2.24348249e+01]))
+#('Affinity: ', array([21.49984562, 21.49984562, 21.49984562, 21.49984562, 21.49984562]))
+#('VmaxA (1/s): ', array([8.65541083e-07, 4.86729520e-06, 2.73708123e-05, 1.53917389e-04,
+#       8.65541083e-04]))
+#('kDOC (uM C): ', array([0.00347829, 0.01955988, 0.10999326, 0.61853758, 3.4782924 ]))
+#('kDON (uM C): ', array([0.00069566, 0.00391198, 0.02199865, 0.12370752, 0.69565848]))
+#('kDOP (uM C): ', array([4.34786550e-05, 2.44498445e-04, 1.37491579e-03, 7.73171969e-03,
+#       4.34786550e-02]))
+#('kDOFe (uM C): ', array([4.34786550e-08, 2.44498445e-07, 1.37491579e-06, 7.73171969e-06,
+#       4.34786550e-05]))
+#
+#2. Set of the larger copio types:
+#('d: ', 0.6)
+#('VmaxA: ', array([1.05127924e-01, 5.91177759e-01, 3.32443684e+00, 1.86946822e+01,
+#       1.05127924e+02]))
+#('umaxA: ', array([3.15383771e-02, 1.77353328e-01, 9.97331053e-01, 5.60840466e+00,
+#       3.15383771e+01]))
+#('Affinity: ', array([13.70799837, 13.70799837, 13.70799837, 13.70799837, 13.70799837]))
+#('VmaxA (1/s): ', array([1.21675838e-06, 6.84233517e-06, 3.84772783e-05, 2.16373637e-04,
+#       1.21675838e-03]))
+#('kDOC (uM C): ', array([0.00766909, 0.04312648, 0.24251804, 1.36377914, 7.66909368]))
+#('kDON (uM C): ', array([0.00153382, 0.0086253 , 0.04850361, 0.27275583, 1.53381874]))
+#('kDOP (uM C): ', array([9.58636710e-05, 5.39081038e-04, 3.03147545e-03, 1.70472392e-02,
+#       9.58636710e-02]))
+#('kDOFe (uM C): ', array([9.58636710e-08, 5.39081038e-07, 3.03147545e-06, 1.70472392e-05,
+#       9.58636710e-05]))
+########################################################## 
+#POM: same as larger B for now, with MIDDLE 3 values (not fastest, not slowest resolved): 
+ PCmax(7)= 3.84772783e-04, 
+ PCmax(8)= 3.84772783e-05, 
+ PCmax(9)= 3.84772783e-06, 
+ PCmax(20)= 3.84772783e-04, 
+ PCmax(21)= 3.84772783e-05, 
+ PCmax(22)= 3.84772783e-06, 
+#DOM:
+#Aerobic Copios
+ PCmax(10)= 1.21675838e-03, 
+ PCmax(11)= 2.16373637e-04, 
+ PCmax(12)= 3.84772783e-05,
+ PCmax(13)= 6.84233517e-06,
+ PCmax(14)= 1.21675838e-06,
+#Aerobic Oligos
+ PCmax(15)= 8.65541083e-04, 
+ PCmax(16)= 1.53917389e-04, 
+ PCmax(17)= 2.73708123e-05, 
+ PCmax(18)= 4.86729520e-06, 
+ PCmax(19)= 8.65541083e-07, 
+#Anaerobic (same as Copios):
+ PCmax(23)= 1.21675838e-03, 
+ PCmax(24)= 2.16373637e-04, 
+ PCmax(25)= 3.84772783e-05,
+ PCmax(26)= 6.84233517e-06,
+ PCmax(27)= 1.21675838e-06,
+#Half-sats:
+#POM (no competitive pairs, so same as "copio" traits, though doesn't matter):
+#POM 1, aerobe
+ ksatPOC(7)= 2.4251804000000, 
+ ksatPON(7)= 0.485036100000000, 
+ ksatPOP(7)= 0.03031475450000, 
+ ksatPOFe(7)= 3.03147545000e-05, 
+#POM 2, aerobe
+ ksatPOC(8)= 0.24251804000000, 
+ ksatPON(8)= 0.048503610000000, 
+ ksatPOP(8)= 0.003031475450000, 
+ ksatPOFe(8)= 3.03147545000e-06, 
+#POM 3, aerobe
+ ksatPOC(9)= 0.024251804000000, 
+ ksatPON(9)= 0.0048503610000000, 
+ ksatPOP(9)= 0.000303147545000, 
+ ksatPOFe(9)= 3.031475450000e-07, 
+#POM 1, anaerobe
+ ksatPOC(20)= 2.4251804000000, 
+ ksatPON(20)= 0.485036100000000, 
+ ksatPOP(20)= 0.03031475450000, 
+ ksatPOFe(20)= 3.03147545000e-05, 
+#POM 2, anaerobe
+ ksatPOC(21)= 0.24251804000000, 
+ ksatPON(21)= 0.048503610000000, 
+ ksatPOP(21)= 0.003031475450000, 
+ ksatPOFe(21)= 3.03147545000e-06, 
+#POM 3, anaerobe
+ ksatPOC(22)= 0.024251804000000, 
+ ksatPON(22)= 0.0048503610000000, 
+ ksatPOP(22)= 0.000303147545000, 
+ ksatPOFe(22)= 3.031475450000e-07, 
+#DOM:
+#DOM 1: fastest copio
+ ksatDOC(10)= 7.66909368000000000, 
+ ksatDON(10)= 1.533818740000000, 
+ ksatDOP(10)= 9.5863671000000e-02, 
+ ksatDOFe(10)= 9.58636710000e-05, 
+#DOM 2:
+ ksatDOC(11)= 1.3637791400000000, 
+ ksatDON(11)= 0.2727558300000000, 
+ ksatDOP(11)= 1.7047239200000e-02, 
+ ksatDOFe(11)= 1.704723920000e-05, 
+#DOM 3:
+ ksatDOC(12)= 0.24251804000000, 
+ ksatDON(12)= 0.048503610000000, 
+ ksatDOP(12)= 0.003031475450000, 
+ ksatDOFe(12)= 3.03147545000e-06, 
+#DOM 4:  
+ ksatDOC(13)= 0.0431264800000000, 
+ ksatDON(13)= 0.008625300000000, 
+ ksatDOP(13)= 5.3908103800000-04, 
+ ksatDOFe(13)= 5.39081038000e-07, 
+#DOM 5: slowest copio
+ ksatDOC(14)= 0.0076690900000000, 
+ ksatDON(14)= 0.001533820000000, 
+ ksatDOP(14)= 9.5863671000000e-05, 
+ ksatDOFe(14)= 9.586367100000e-08, 
+# 
+#DOM 1: fastest oligo
+ ksatDOC(15)= 3.4782924000000,
+ ksatDON(15)= 0.69565848000000, 
+ ksatDOP(15)= 4.347865500000e-02, 
+ ksatDOFe(15)= 4.34786550000e-05, 
+#DOM 2: 
+ ksatDOC(16)= 0.61853758000000,
+ ksatDON(16)= 0.12370752000000, 
+ ksatDOP(16)= 7.73171969000e-03, 
+ ksatDOFe(16)= 7.73171969000e-06, 
+#DOM 3:
+ ksatDOC(17)= 0.1099932600000000,
+ ksatDON(17)= 0.021998650000000, 
+ ksatDOP(17)= 1.374915790000000e-03, 
+ ksatDOFe(17)= 1.374915790000000e-06, 
+#DOM 4: 
+ ksatDOC(18)= 0.01955988000000,
+ ksatDON(18)= 0.00391198000000, 
+ ksatDOP(18)= 2.44498445000e-04, 
+ ksatDOFe(18)= 2.4449844500e-07, 
+#DOM 5: slowest oligo 
+ ksatDOC(19)= 0.00347829000000,
+ ksatDON(19)= 0.00069566000000, 
+ ksatDOP(19)= 4.3478655000000e-05, 
+ ksatDOFe(19)= 4.34786550000e-08, 
+#
+#DOM 1: fastest anaerobe (copio) 
+ ksatDOC(23)= 7.66909368000000000, 
+ ksatDON(23)= 1.533818740000000, 
+ ksatDOP(23)= 9.5863671000000e-02, 
+ ksatDOFe(23)= 9.58636710000e-05, 
+#DOM 2:
+ ksatDOC(24)= 1.3637791400000000, 
+ ksatDON(24)= 0.2727558300000000, 
+ ksatDOP(24)= 1.7047239200000e-02, 
+ ksatDOFe(24)= 1.704723920000e-05, 
+#DOM 3:
+ ksatDOC(25)= 0.24251804000000, 
+ ksatDON(25)= 0.048503610000000, 
+ ksatDOP(25)= 0.003031475450000, 
+ ksatDOFe(25)= 3.03147545000e-06, 
+#DOM 4:  
+ ksatDOC(26)= 0.0431264800000000, 
+ ksatDON(26)= 0.008625300000000, 
+ ksatDOP(26)= 5.3908103800000-04, 
+ ksatDOFe(26)= 5.39081038000e-07, 
+#DOM 5: slowest copio
+ ksatDOC(27)= 0.0076690900000000, 
+ ksatDON(27)= 0.001533820000000, 
+ ksatDOP(27)= 9.5863671000000e-05, 
+ ksatDOFe(27)= 9.586367100000e-08, 
+# 
+#Nitrifiers:
+#yield(28)= 0.044642857142857, !AOO mol NH4/mol biomass C = 1/112*5
+#yieldO2(28)= 0.030864197530864, !AOO mol O2/mol biomass C = 1/162*5
+#yield(29)= 0.014970059880240, !NOO mol NO2/mol biomass C = 1/334*5
+#yieldO2(29)= 0.030864197530864, !NOO mol O2/mol biomass C = 1/162*5
+#updated yields:
+#yNH4= 0.098±0.021 and yNO2 = 0.043±0.004 mol C fixed per mol N oxidized
+#keep O2 demand the same for now (not looking at O2/plenty of O2)
+ yield(28)= 0.09800000000000, !AOO mol NH4/mol biomass C = 1/112*5
+ yieldO2(28)= 0.030864197530864, !AOO mol O2/mol biomass C = 1/162*5
+ yield(29)= 0.043000000000000, !NOO mol NO2/mol biomass C = 1/334*5
+ yieldO2(29)= 0.030864197530864, !NOO mol O2/mol biomass C = 1/162*5
+#From default: should be the FIRST Z that eats PP#4: 
+#(this has been wrong in some, careful!)
+ EXPORTFRACMort(30)= .2,
+ EXPORTFRACMort2(30)= .2,
+#sinking with POM 
+#biosink(7)=1.157407407407407e-04, ! m/s from 10m/day, same as POM (wN_sink, wC_wink, wP_sink)
+#how much lower should PA sinking rate be? 10x lower?
+ biosink(7)=1.157407407407407e-05, 
+ biosink(8)=1.157407407407407e-05, 
+ biosink(9)=1.157407407407407e-05, 
+ biosink(20)=1.157407407407407e-05, 
+ biosink(21)=1.157407407407407e-05, 
+ biosink(22)=1.157407407407407e-05,
+#change bact grazer traits: 
+#grazemax(15)= 1.157407407407407e-06, !/s from 0.1/day max grazing on B
+#kgrazesat(15)= 0.1, !mmol/m3 B
+
+#Original "default" with 6B and 5Z:
+#PALAT(1,16)= 1.0,
+#PALAT(2,16)= 1.0,
+#PALAT(3,14)= 1.0,
+#PALAT(4, 13)= 1.0,
+#PALAT(5,16)= 1.0,
+#PALAT(6,15)= 1.0,
+#PALAT(7,17)= 1.0,
+#PALAT(8,17)= 1.0,
+#PALAT(9,17)= 1.0,
+#PALAT(10,17)= 1.0,
+#PALAT(11,17)= 1.0,
+#PALAT(12,17)= 1.0,
+
+#Increase PA mortality to account for leaving and other mortality 
+#Other microbes: 
+#Default group linear mort = 1.157407407407407e-07 = 0.01/day (most mort is quadr and grazing)
+#Here, make mort 10x lower than PCmax. but it's too much for them to handle :)
+#mort(7)= 3.660043588157847e-06, 
+#mort(8)= 1.157407407407407E-06, 
+#mort(9)= 3.660043588157847e-07, 
+#mort(20)= 3.660043588157847e-06, 
+#mort(21)= 1.157407407407407E-06, 
+#mort(22)= 3.660043588157847e-07, 
+#Default group quadratic mort2 = 2.314814814814815e-08
+#now 10x higher for all
+#Now this is at 2.0 (2.0/86400 = 0.00002314814815) 
+ mort2(7)= 0.00002314814815 
+ mort2(8)= 0.00002314814815 
+ mort2(9)= 0.00002314814815 
+ mort2(20)=0.00002314814815
+ mort2(21)=0.00002314814815
+ mort2(22)=0.00002314814815
+#Nitrifiers: 
+ mort2(28)=6.944444444444446e-06
+ mort2(29)=6.944444444444446e-06
+
+#Z are 30, 31, 32, 33, 34
+#PP 4 (grazed by 30) is Pro-like, so have COPIOS (and anaerobes) grazed by this one. AOA also is about this size!
+#PP 3 (grazed by 31) is syn-like, one size up, and similar size to NOB. 
+#34 is then just for the smallest SAR11-sized oligotrophic bacteria.
+ PALAT= 100*0.0 ,
+ PALAT(1,33)= 1.0,
+ PALAT(2,33)= 1.0,
+ PALAT(3,31)= 1.0,
+ PALAT(4,30)= 1.0,
+ PALAT(5,33)= 1.0,
+ PALAT(6,32)= 1.0,
+#PALAT(7,3X)= 1.0,
+#PALAT(8,3X)= 1.0,
+#PALAT(9,3X)= 1.0,
+ PALAT(10,30)= 1.0,
+ PALAT(11,30)= 1.0,
+ PALAT(12,30)= 1.0,
+ PALAT(13,30)= 1.0,
+ PALAT(14,30)= 1.0,
+ PALAT(15,34)= 1.0,
+ PALAT(16,34)= 1.0,
+ PALAT(17,34)= 1.0,
+ PALAT(18,34)= 1.0,
+ PALAT(19,34)= 1.0,
+#PALAT(20,3X)= 1.0,
+#PALAT(21,3X)= 1.0,
+#PALAT(22,3X)= 1.0,
+ PALAT(23,30)= 1.0,
+ PALAT(24,30)= 1.0,
+ PALAT(25,30)= 1.0,
+ PALAT(26,30)= 1.0,
+ PALAT(27,30)= 1.0,
+#PALAT(28,30)= 1.0,
+#PALAT(29,31)= 1.0,
+
+ ASSEFF= 100*0.5 ,
+ &
